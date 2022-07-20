@@ -1,0 +1,22 @@
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        higherRating = [0] * len(rating)
+        lowerRating = [0] * len(rating)
+        count = 0
+        
+        for i in range(len(rating)):
+            for j in range(i+1, len(rating)):
+                if rating[j] > rating[i]:
+                    higherRating[i] += 1
+                elif rating[j] < rating[i] :
+                    lowerRating[i] += 1
+        
+        for i in range(len(rating)): # first soldier in a team
+            for j in range(i+1, len(rating)): # 2nd soldier
+                if rating[j] > rating[i] : # increasing seq
+                    count += higherRating[j]
+                elif rating[j] < rating[i]: #decreasing seq
+                    count += lowerRating[j]
+        
+        return count
+                    
